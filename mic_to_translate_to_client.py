@@ -12,6 +12,7 @@ import const
 import language_translation_papago
 
 API_BASE = "https://openapi.vito.ai"
+
 url = "http://172.21.119.171:8888/text"
 
 class RTZROpenAPIClient:
@@ -76,13 +77,16 @@ class RTZROpenAPIClient:
                 print(msg)
                 if msg["final"]:
                     print("final ended with " + msg["alternatives"][0]["text"])
-                    print(language_translation_papago.translate_text(msg["alternatives"][0]["text"], 'en'))
+                    translated_text = language_translation_papago.translate_text(msg["alternatives"][0]["text"], 'en')
+                    if translated_text.strip() != "":
+                        requests.post(url, data=translated_text)
 
         async with websockets.connect(STREAMING_ENDPOINT, **conn_kwargs) as websocket:
             await asyncio.gather(
                 streamer(websocket),
                 transcriber(websocket),
             )
+
 
 if __name__ == "__main__":
     CLIENT_ID = const.returnzero_id

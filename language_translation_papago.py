@@ -42,7 +42,7 @@ def translate_text(text, target_language):
         translated_text = result['message']['result']['translatedText']
         return translated_text
     else:
-        return f'Failed to translate. Status code: {response.status_code}'
+        return ''
 
 # 사용자 입력 받기
 #text_to_translate = input('번역할 텍스트를 입력하세요: ')
