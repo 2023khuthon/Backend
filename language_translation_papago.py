@@ -1,7 +1,5 @@
 import requests
-from langdetect import detect
-
-
+import const
 
 # API 요청 URL
 translate_url = 'https://openapi.naver.com/v1/papago/n2mt'
@@ -10,8 +8,8 @@ detect_url = 'https://openapi.naver.com/v1/papago/detectLangs'
 # API 요청 헤더
 headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'X-Naver-Client-Id': 'NzQTG85f4mQkbAkcKqpx',
-    'X-Naver-Client-Secret': '9crzjNTgbV',
+    'X-Naver-Client-Id': const.papago_id,
+    'X-Naver-Client-Secret': const.papago_secret,
 }
 
 def detect_language(text):
@@ -47,8 +45,8 @@ def translate_text(text, target_language):
         return f'Failed to translate. Status code: {response.status_code}'
 
 # 사용자 입력 받기
-text_to_translate = input('번역할 텍스트를 입력하세요: ')
-target_language = input('번역하려는 언어 코드를 입력하세요 (예: ko): ')
+#text_to_translate = input('번역할 텍스트를 입력하세요: ')
+# = input('번역하려는 언어 코드를 입력하세요 (예: ko): ')
 
-translated_text = translate_text(text_to_translate, target_language)
-print(f'Translated text ({target_language}): {translated_text}')
+#translated_text = translate_text(text_to_translate, target_language)
+#print(f'Translated text ({target_language}): {translated_text}')
